@@ -1,0 +1,21 @@
+<resources>
+  <string name="app_name">MVPWeatherApp</string>
+
+  <string name="label_ok">Ok</string>
+  <string name="hint_country">Country</string>
+  <string name="go_action">Go!</string>
+  <string name="ok">Ok</string>
+  <string name="alert">Alert</string>
+
+  <string name="error_message_empty">Please fill the country field.</string>
+  <string name="error_message_no_items">Sorry!, please try later.</string>
+  <string name="error_message_not_found">Sorry!, We can´t find result for your search.</string>
+  <string name="title_activity_detail_weather">DetailWeather</string>
+
+
+  <string name="facebook_app_id">1931803393512450</string>
+  <string name="facebook_app_key">48280be9d740aa8a5e879be859b7c2a7</string>
+  <string name="fb_login_protocol_scheme">fb1931803393512450</string>
+
+  <string name="fb_request_login">If you want to post to Facebook, please login.</string>
+</resources>
