@@ -23,6 +23,9 @@ import com.globant.mvpweatherapp.app.WeatherApp;
 import com.globant.mvpweatherapp.constants.AppConstants;
 import com.globant.mvpweatherapp.databinding.ActivityMainBinding;
 import com.globant.mvpweatherapp.detail.view.WeatherDetailActivity;
+import com.globant.mvpweatherapp.di.component.ActivityComponent;
+import com.globant.mvpweatherapp.di.component.DaggerActivityComponent;
+import com.globant.mvpweatherapp.di.module.ActivityModule;
 import com.globant.mvpweatherapp.model.LiteWeather;
 import com.globant.mvpweatherapp.presenter.CountriesAdapter;
 import com.globant.mvpweatherapp.presenter.MainPresenter;
@@ -36,16 +39,18 @@ public class MainActivity extends AppCompatActivity implements MainView, IClickI
 
   private ActivityMainBinding mBinding;
   private CountriesAdapter mCountriesAdapter;
+  private ActivityComponent mActivityComponent;
+
   @Inject
-  MainPresenter mPresenter;
+  MainPresenter<MainView> mPresenter;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    ((WeatherApp) getApplication()).getAppComponent().inject(this);
-
+    initDagger();
+    mActivityComponent.inject(this);
     mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-    mPresenter.setMainView(this);
+    mPresenter.onAttach(this);
 
     setSupportActionBar(mBinding.toolbar);
   }
@@ -142,5 +147,17 @@ public class MainActivity extends AppCompatActivity implements MainView, IClickI
   @Override
   public void onClickItem(LiteWeather item) {
 
+  }
+
+  @Override
+  public void showMessage(String message) {
+
+  }
+
+  private void initDagger(){
+    mActivityComponent = DaggerActivityComponent.builder()
+        .activityModule(new ActivityModule(this))
+        .applicationComponent(((WeatherApp) getApplication()).getComponent())
+        .build();
   }
 }

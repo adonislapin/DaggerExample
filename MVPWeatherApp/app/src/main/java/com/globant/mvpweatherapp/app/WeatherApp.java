@@ -1,44 +1,29 @@
 package com.globant.mvpweatherapp.app;
 
-import android.app.Activity;
 import android.app.Application;
 
-import com.globant.mvpweatherapp.di.AppComponent;
-import com.globant.mvpweatherapp.di.AppModule;
-import com.globant.mvpweatherapp.di.DaggerAppComponent;
-
-import javax.inject.Inject;
-
-import dagger.android.AndroidInjector;
-import dagger.android.DispatchingAndroidInjector;
-import dagger.android.HasActivityInjector;
+import com.globant.mvpweatherapp.di.component.ApplicationComponent;
+import com.globant.mvpweatherapp.di.component.DaggerApplicationComponent;
+import com.globant.mvpweatherapp.di.module.ApplicationModule;
 
 /**
  * Created by adoniram.dominguez on 26/12/2017.
  */
 
-public class WeatherApp extends Application implements HasActivityInjector{
+public class WeatherApp extends Application{
 
-  private AppComponent appComponent;
-
-  @Inject
-  DispatchingAndroidInjector<Activity> dispatchingActivityInjector;
-
+  private ApplicationComponent applicationComponent;
 
   @Override
   public void onCreate() {
     super.onCreate();
-   appComponent =  DaggerAppComponent.builder()
-        .appModule(new AppModule(this))
+   applicationComponent =  DaggerApplicationComponent.builder()
+        .applicationModule(new ApplicationModule(this))
         .build();
+   applicationComponent.inject(this);
   }
 
-  @Override
-  public AndroidInjector<Activity> activityInjector() {
-    return dispatchingActivityInjector;
-  }
-
-  public AppComponent getAppComponent() {
-    return appComponent;
+  public ApplicationComponent getComponent() {
+    return applicationComponent;
   }
 }

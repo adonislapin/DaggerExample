@@ -3,6 +3,7 @@ package com.globant.mvpweatherapp.view;
 import android.support.annotation.NonNull;
 import android.widget.ImageView;
 
+import com.globant.mvpweatherapp.generic.BaseView;
 import com.globant.mvpweatherapp.model.LiteWeather;
 
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
  * Created by adoniram.dominguez on 21/12/2017.
  */
 
-public interface MainView {
+public interface MainView extends BaseView {
 
   void searchAction(@NonNull String query);
 
