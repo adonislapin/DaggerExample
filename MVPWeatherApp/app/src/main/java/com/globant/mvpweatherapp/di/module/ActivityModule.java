@@ -6,6 +6,7 @@ import android.content.Context;
 import com.globant.mvpweatherapp.di.anotation.ActivityContext;
 import com.globant.mvpweatherapp.di.anotation.PerActivity;
 import com.globant.mvpweatherapp.presenter.MainPresenter;
+import com.globant.mvpweatherapp.presenter.MainPresenterImpl;
 import com.globant.mvpweatherapp.view.MainView;
 
 import dagger.Module;
@@ -38,9 +39,8 @@ public class ActivityModule {
   @Provides
   @PerActivity
   MainPresenter<MainView> provideMainPresenter(
-      MainPresenter<MainView> presenter) {
+      MainPresenterImpl<MainView> presenter) {
     return presenter;
   }
-
 
 }
